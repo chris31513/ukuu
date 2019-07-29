@@ -238,7 +238,18 @@ public class TerminalWindow : Gtk.Window {
 	}
 	
 	public void execute_command(string command){
-		term.feed_child("%s\n".printf(command), -1);
+		term.feed_child(string_to_char_array("%s\n".printf(command)));
+	}
+
+	public char[] string_to_char_array(string str) {
+	
+    	       char[] char_array = new char[str.length];
+
+   	        for (int i = 0; i < str.length; i++){
+        	    char_array[i] = (char)str.get_char(str.index_of_nth_char(i));
+    		}
+    
+		return char_array;
 	}
 
 	public void execute_script(string script_path, bool wait = false){
